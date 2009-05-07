@@ -32,6 +32,9 @@ Upon initial training of the filter, a spam.brain and ham.brain file are created
 To add this spam filter to your .forward file on a unix system, add this line to your .forward file.
  |"/path/to/spamfilter.py -o outputfile"
 
+Then make the spamfilter.py file executable by running
+ chmod a+x spamfilter.py
+
 Output file should point wherever you want your mail to go. Both mail flagged as spam an ham will be written to this file, but with a new header MarkovBrainSpamStatus as either "Spam", "Not Spam", or "Unknown".
 
 WARNING: This has only been tested on the ENIAC system at the University of Pennsylvania's School of Engineering and Applied Sciences.
@@ -43,7 +46,7 @@ ADDITIONAL WARNING: This spam filter does not actually work very well compared t
 
 The two primary files are Brain.py and spamfilter.py. spamfilter.py executes the program, and Brain.py constructs the model. The language model which the Brian class constructs is a dictinoary hashing tuples of n+1 words onto the frequency at which it occurs. The additional Python modules which are included are libraries of helper functions.
 
-No contributed python packages are included, other than those included with Python itself.
+You don't need any additional Python packages to run the filter.
 
 
 ++Directory Structure++

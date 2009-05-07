@@ -1,0 +1,83 @@
+++Quick Start++
+
+The spam and ham corpus we used for training the included ham.brain and spam.brain files is a subset of the 2005 TREC Public Spam Corpus (http://plg.uwaterloo.ca/~gvcormac/treccorpus/).
+
+A few quick directions on how to train the filter on spam and ham, and then use it to check a large number of messages, or one message at a time. In these examples, we expect the index file to conform to the syntax of the one included in the corpus we used. That syntax is a file of references, one per line, to text files containing a singe email. The index marks each one as either spam or ham, and then has the relative path to the file, separated by a space.
+
+For example,
+ham ../013/032
+spam ../014/001
+etc.
+
+ Load ham into filter
+ python spamfilter.py -i /path/to/index -t ham -n -l 100
+ 
+ Load spam into filter
+ python spamfilter.py -i /path/to/index -t spam -s -l 100
+ 
+ Test one email. The following commands are equivalent.
+ python spamfilter.py -f /path/to/email
+ cat /path/to/email | python spamfilter.py
+ 
+ Test a large amount of ham
+ python spamfilter.py -i /path/to/index -t ham -l 1000
+ 
+ Test spam
+ python spamfilter.py -i /path/to/index -t spam -l 1000
+
+Upon initial training of the filter, a spam.brain and ham.brain file are created in the directory, and are necessary for program execution. If these files are deleted, it will be necessary to generate new ones by loading new ham and spam into the filter. For best results, the filter should be trained on roughly similar quantities of ham and spam.
+
+++Setting up a .forward file++
+
+To add this spam filter to your .forward file on a unix system, add this line to your .forward file.
+ |"/path/to/spamfilter.py -o outputfile"
+
+Output file should point wherever you want your mail to go. Both mail flagged as spam an ham will be written to this file, but with a new header MarkovBrainSpamStatus as either "Spam", "Not Spam", or "Unknown".
+
+WARNING: This has only been tested on the ENIAC system at the University of Pennsylvania's School of Engineering and Applied Sciences.
+
+ADDITIONAL WARNING: This spam filter does not actually work very well compared to most available spam filters. If you rely solely on it, you will likely get spam, and suffer from false positives!
+
+
+++Code Overview++
+
+The two primary files are Brain.py and spamfilter.py. spamfilter.py executes the program, and Brain.py constructs the model. The language model which the Brian class constructs is a dictinoary hashing tuples of n+1 words onto the frequency at which it occurs. The additional Python modules which are included are libraries of helper functions.
+
+No contributed python packages are included, other than those included with Python itself.
+
+
+++Directory Structure++
+
+spamfilter-0.1.0/
+	README
+	LICENSE
+	__init__.py
+	spamfilter.py
+	Brain.py
+	directory.py
+	tokenizer.py
+	tools.py
+	spam.brain
+	ham.brain
+
+++License++
+
+    Semi-Markov Spam Filter of Doom
+    Filters spam, but not as well as other filters. Mostly intended as an experiment in the use of Markov chain-like objects for natural language analysis.
+    Copyright (c) 2009 Matthew Croop
+    Copyright (c) 2009 Albert Sun
+
+
+    This program is free software: you can redistribute it and/or
+    modify it under the terms of the GNU General Public License version 3 as
+    published by the Free Software Foundation.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General Public License for more details.
+
+    A copy the GNU General Public Licence version 3 is provide along
+    with this program in the file name LICENCE. If not, see
+    <http://www.gnu.org/licenses/>.
+

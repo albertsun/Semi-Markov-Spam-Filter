@@ -1,0 +1,71 @@
+
+Project Name: Semi-Markov Spam Filter of Doom
+Group Members:
+  (1) Matthew Croop, mcroop
+  (2) Albert Sun, asun
+
+ 
+*1* Project Description
+  
+
+   (a) Describe the original goal(s) of your project.
+
+We initially planned to build a general text comparison application, with various utilities related to comparing bodies of text with Markov chains. It could be used for spam filtering, but could potentially have other uses.
+
+   (b) Describe the completed goal(s) of your project and the
+   incomplete ones.
+
+We decided to focus on a building a spam filter. Our project can take emails as input, build and store a statistical model from their message texts, and match other input emails to the statistical model to determine whether they are a closer match to the "spam" or "not spam" models. Our program can output this information directly, or can resave the input email with a new header to designate its spam status.
+We initially intended to be able to generate random text based on a given statistical model. Though we did have this working earlier, the data structure we were using was very slow at loading large data sets. We decided being able to handle large data sets is more important for a spam filter than generating nonsensical spam, so we changed the data structure to one that loads significantly faster but does not support random generation.
+
+   (c) What was the most challenging part of the coding?
+
+Most of the coding was relatively straightforward. We had the aforementioned issues with slow loading of files, but getting marshal to work in place of cPickle was not too difficult. Interfacing with external scripts (.forward files) was very confusing, however.
+
+*2* Programming
+
+   (a) What additional python code, e.g, pygame, wxpython, other
+   modules, did you use in your project?
+
+None. We had intended to use NLTK, but decided our algorithm was relatively low-level from a natural language viewpoint and didn't require NLTK's extra abstractions.
+
+   (b) What python paradigms did you use in your code?
+
+We use generators to act as streams of tokens passed from the message parser to the statistical model. We also use classes to organize parts of our code and use dictionaries to map phrases to counts, though these constructs are not exclusive to python.
+
+   (c) Is python a good programming language for the task you set
+   about completing?
+
+We did have some performance issues with loading large data files that would not have been a problem in a faster language. Overall, however, Python was an effective language in which our algorithms could be easily implemented.
+
+
+*3* Personal
+
+
+   (a) Is your group satisfied with the final version of your code?
+
+Relatively.
+
+   (b) If you had more time, what additions would you make?
+
+We would test different types of filters, possibly adding some method to predict which filter will be most effective for an input email.
+
+   (c) Based on the final result, how do your rank it on a scale from
+   0 to 5, where 0 is horrible and 5 is super duper awesome? Explain
+   your reasoning.
+
+4. It isn't as accurate as it could potentially be with other statistical methods, but it was more effective than we expected.
+
+   (d) Would you be willing to release your code under GPL (v3) and
+   have it posted on the class website. If so, please prepare your
+   code prior to submission as described in the release
+   instructions. Also, please provide a paragraph below describing
+   your project and include a screen shot in your submission to be
+   posted alongside the link.
+
+
+
+
+
+
+
